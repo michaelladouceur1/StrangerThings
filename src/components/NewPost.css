@@ -1,1 +1,11 @@
 @import url('../App.css');
+
+.new-post {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.new-post div {
+    margin-bottom: 30px;
+}

@@ -6,6 +6,8 @@ const BASE_URL = 'https://strangers-things.herokuapp.com/api/2104-uic-web-ft';
 let token = '';
 
 function returnHeaders() {
+    console.log('Headers called...');
+    console.log(token);
     return {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -18,6 +20,7 @@ async function loginRegisterUser(method, user) {
     try {
         let response = await axios.post(url, user)
         token = response.data.data.token;
+        console.log('Login Token: ', token);
         getPosts();
     } catch (error) {
         console.log('ERROR');
@@ -47,14 +50,19 @@ async function getPosts() {
     }
 }
 
-async function setPost(post) {
+async function postPost(post) {
     let url = `${BASE_URL}/posts`;
+    let newPost = {
+        'post': post
+    }
+    console.log('New Post: ', newPost);
     try {
-        let response = await axios.post(url, post, returnHeaders());
+        let response = await axios.post(url, newPost, returnHeaders());
         console.log(response);
     } catch (error) {
+        console.log('Error Posting')
         console.error(error);
     }
 }
 
-export {loginRegisterUser, getMeData}
+export {loginRegisterUser, getMeData, postPost}
