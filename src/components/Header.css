@@ -1,0 +1,11 @@
+@import url('../App.css');
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.signup-login {
+    display: flex;
+}
