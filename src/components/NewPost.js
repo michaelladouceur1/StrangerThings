@@ -29,17 +29,26 @@ const NewPost = (props) => {
             post.location=location,
             post.willDeliver=willDeliver)
         await postPost(post);
+        clearNewPost();
         let posts = await getPosts();
         setPosts(posts);
-        clearNewPost();
     }
 
+    // Function not clearing form when invoked
     function clearNewPost() {
+        console.log('clearNewPost')
         setTitle('');
         setDescription('');
         setPrice('');
         setLocation('');
         setWillDeliver(false);
+        setPost(
+            post.title=title, 
+            post.description=description,
+            post.price=price,
+            post.location=location,
+            post.willDeliver=willDeliver
+        )
     }
 
     return (

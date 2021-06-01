@@ -4,6 +4,8 @@
     display: flex;
     flex-direction: column;
     padding: 30px;
+    height: 500px;
+    width: 30%;
 }
 
 .new-post div {

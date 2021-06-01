@@ -1,12 +1,17 @@
 // LIBRARY IMPORTS 
 import React from 'react';
 import {useState, useEffect} from 'react';
+import {
+  Route,
+  Switch,
+  useParams
+} from 'react-router-dom';
 
 // JS IMPORTS LOCAL 
 import Header from './components/Header';
-import Content from './components/Content';
 import Posts from './components/Posts';
 import NewPost from './components/NewPost';
+import FeaturedPost from './components/FeaturedPost';
 import {getPosts} from './api';
 
 
@@ -38,10 +43,15 @@ function App() {
       {/* <Content
       posts={posts} /> */}
       <main>
-        <Posts
-        posts={posts}
-        currentUser={currentUser}
-        setPosts={setPosts} />
+        <Switch>
+          <Route exact path='/'>
+            <Posts
+            posts={posts}
+            currentUser={currentUser}
+            setPosts={setPosts} />
+          </Route>
+          <Route exact path='/:id' render={(routeProps) => <FeaturedPost posts={posts} {...routeProps}/>} />
+        </Switch>
         <NewPost
         setPosts={setPosts} />
       </main>

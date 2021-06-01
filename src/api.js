@@ -66,8 +66,8 @@ async function postPost(post) {
     }
 }
 
-async function deletePost(id) {
-    let url = `${BASE_URL}/posts/${id}`
+async function deletePost(post_id) {
+    let url = `${BASE_URL}/posts/${post_id}`
     try {
         await axios.delete(url, returnHeaders())
         return true
@@ -76,4 +76,21 @@ async function deletePost(id) {
     }
 }
 
-export {loginRegisterUser, getMeData, getPosts, postPost, deletePost}
+async function postMessage(post_id, content) {
+    let url = `${BASE_URL}/posts/${post_id}/messages`
+    let newMessage = {
+        'message': {
+            'content': content
+        }
+    }
+    console.log(post_id)
+    console.log(newMessage)
+    try {
+        let response = await axios.post(url, newMessage, returnHeaders());
+        console.log(response);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export {loginRegisterUser, getMeData, getPosts, postPost, deletePost, postMessage}

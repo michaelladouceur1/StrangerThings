@@ -1,14 +1,13 @@
 import './Posts.css';
 import React from 'react';
+import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
-import {getPosts, deletePost} from '../api';
+import {getPosts, deletePost, postMessage} from '../api';
 
 const Posts = (props) => {
     let {posts, currentUser, setPosts} = props
 
-    // IMPORTANT: active, isAuthor
-    // DISPLAY: author -> username, createdAt, description, location, price, title, updatedAt, willDeliver
-    // OPEN: messages
     return (
         <div className='posts'>
             {
@@ -27,10 +26,14 @@ const Posts = (props) => {
 
 const PostCard = (props) => {
     let {post, currentUser, setPosts} = props
+
+    let [messageVisible, setMessageVisible] = useState(false)
+    let [message, setMessage] = useState('');
+
     let authorUser = post.author.username === currentUser
 
     return (
-        // Try to figure out how to do this using the isAuthor from the API. Not with author.username
+        // Change functionality from using author.username to isAuthor from API
         <div className={authorUser ? 'post-card author' : 'post-card'}>
             <div className='post-card-header'>
                 <h3>{post.title}</h3>
@@ -52,11 +55,30 @@ const PostCard = (props) => {
                 <p>Will Deliver: {post.willDeliver ? <span>Yes</span> : <span>No</span>}</p>
             </div>
             <div className='post-card-footer'>
-                <h5>{post.author.username}</h5>
-                <h5>Created: {post.createdAt.split('T')[0]}</h5>
-                <h5>Updated: {post.updatedAt.split('T')[0]}</h5>
-                {/* Change post id to appended data onto post-card */}
-                <h5 className='post-id'>Post ID: {post._id}</h5>
+                <button onClick={() => {
+                    setMessageVisible(true);
+                }}>Message</button>
+                {
+                    messageVisible
+                    ? <div> 
+                        <textarea placeholder='Message...' onChange={(event) => {
+                            setMessage(event.target.value);
+                        }}></textarea>
+                        <button onClick={() => {
+                            postMessage(post._id, message);
+                            setMessageVisible(false);
+                        }}>Submit</button>
+                        <button onClick={() => {
+                            setMessageVisible(false);
+                        }}>Close</button>
+                    </div>
+                    : <div>
+                        <h5>{post.author.username}</h5>
+                        <h5>Created: {post.createdAt.split('T')[0]}</h5>
+                        <h5>Updated: {post.updatedAt.split('T')[0]}</h5>
+                    </div>
+                }
+                <Link to={`/${post._id}`}>Expand</Link>
             </div>
         </div>
     )

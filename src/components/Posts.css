@@ -1,14 +1,28 @@
 .posts {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    overflow-y: scroll;
+    width: 70%;
 }
 
 .post-card {
     margin: 20px;
-    padding: 20px;
     background-color: gray;
 }
 
 .author {
     background-color: aqua;
+}
+
+.post-card-header {
+    background-color: lightblue;
+    padding: 10px;
+}
+.post-card-body {
+    padding: 10px;
+}
+
+.post-card-footer {
+    background-color: lightblue;
+    padding: 10px;
 }
