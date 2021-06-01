@@ -1,8 +1,10 @@
 import './Posts.css';
 import React from 'react';
 
+import {getPosts, deletePost} from '../api';
+
 const Posts = (props) => {
-    let {posts, currentUser} = props
+    let {posts, currentUser, setPosts} = props
 
     // IMPORTANT: active, isAuthor
     // DISPLAY: author -> username, createdAt, description, location, price, title, updatedAt, willDeliver
@@ -14,7 +16,8 @@ const Posts = (props) => {
                     if(post.active) {
                         return <PostCard
                         post={post}
-                        currentUser={currentUser} />
+                        currentUser={currentUser}
+                        setPosts={setPosts} />
                     }
                 })
             }
@@ -23,7 +26,7 @@ const Posts = (props) => {
 }
 
 const PostCard = (props) => {
-    let {post, currentUser} = props
+    let {post, currentUser, setPosts} = props
     let authorUser = post.author.username === currentUser
 
     return (
@@ -34,7 +37,12 @@ const PostCard = (props) => {
                 <h3>{post.price}</h3>
                 {
                     authorUser
-                    ? <button>Delete</button>
+                    ? <button onClick={async (event) => {
+                        console.log('Post ID in Post card: ', post._id);
+                        await deletePost(post._id);
+                        let posts = await getPosts();
+                        setPosts(posts);
+                    }}>Delete</button>
                     : ''
                 }
             </div>
@@ -47,6 +55,8 @@ const PostCard = (props) => {
                 <h5>{post.author.username}</h5>
                 <h5>Created: {post.createdAt.split('T')[0]}</h5>
                 <h5>Updated: {post.updatedAt.split('T')[0]}</h5>
+                {/* Change post id to appended data onto post-card */}
+                <h5 className='post-id'>Post ID: {post._id}</h5>
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ let token = '';
 
 function returnHeaders() {
     console.log('Headers called...');
-    console.log(token);
+    console.log('Token: ', token);
     return {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -27,6 +27,8 @@ async function loginRegisterUser(method, user) {
         console.error(error);
     }
 }
+
+// Add user data button when logged in
 
 async function getMeData() {
     let url = `${BASE_URL}/users/me`;
@@ -57,14 +59,21 @@ async function postPost(post) {
     let newPost = {
         'post': post
     }
-    console.log('New Post: ', newPost);
     try {
         let response = await axios.post(url, newPost, returnHeaders());
-        console.log(response);
     } catch (error) {
-        console.log('Error Posting')
         console.error(error);
     }
 }
 
-export {loginRegisterUser, getMeData, getPosts, postPost}
+async function deletePost(id) {
+    let url = `${BASE_URL}/posts/${id}`
+    try {
+        await axios.delete(url, returnHeaders())
+        return true
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export {loginRegisterUser, getMeData, getPosts, postPost, deletePost}

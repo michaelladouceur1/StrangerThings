@@ -9,3 +9,7 @@ header {
 .signup-login {
     display: flex;
 }
+
+.logged-in-menu {
+    display: flex;
+}

@@ -28,8 +28,10 @@ const Header = (props) => {
             <h1>LOGO GOES HERE</h1>
             {
                 currentUser !== ''
-                ? (<div>
+                ? (<div className='logged-in-menu'>
                     <h1>{currentUser}</h1>
+                    {/* Make dropdown with all posts and messages */}
+                    <button onClick={getMeData}>Account</button>
                     <button onClick={() => {
                         setUsername('');
                         setPassword('');

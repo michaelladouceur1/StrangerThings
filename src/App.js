@@ -40,7 +40,8 @@ function App() {
       <main>
         <Posts
         posts={posts}
-        currentUser={currentUser} />
+        currentUser={currentUser}
+        setPosts={setPosts} />
         <NewPost
         setPosts={setPosts} />
       </main>
