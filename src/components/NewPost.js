@@ -2,10 +2,11 @@ import './NewPost.css';
 import React from 'react';
 import {useState} from 'react';
 
-import {postPost} from '../api'
+import {postPost, getPosts} from '../api'
 
 const NewPost = (props) => {
-    // title, description, price, location, willdeliver
+    let {setPosts} = props
+
     let [title, setTitle] = useState('');
     let [description, setDescription] = useState('');
     let [price, setPrice] = useState('');
@@ -19,22 +20,31 @@ const NewPost = (props) => {
         'willDeliver': false
       })
 
+    async function submitPost(event) {
+        event.preventDefault();
+        setPost(
+            post.title=title, 
+            post.description=description,
+            post.price=price,
+            post.location=location,
+            post.willDeliver=willDeliver)
+        await postPost(post);
+        let posts = await getPosts();
+        setPosts(posts);
+        clearNewPost();
+    }
+
+    function clearNewPost() {
+        setTitle('');
+        setDescription('');
+        setPrice('');
+        setLocation('');
+        setWillDeliver(false);
+    }
+
     return (
         <div className='new-post'>
-            <form id='post-form' onSubmit={(event) => {
-                event.preventDefault();
-                console.log('Title: ', title);
-                console.log('Desc: ', description);
-                console.log('Location: ', location);
-                setPost(
-                    post.title=title, 
-                    post.description=description,
-                    post.price=price,
-                    post.location=location,
-                    post.willDeliver=willDeliver)
-                console.log('Original Post: ', post);
-                postPost(post);
-            }}>
+            <form id='post-form' onSubmit={submitPost}>
                 <div className='input-group'>
                     <label htmlFor='post-title'>Title</label>
                     <input type='text' placeholder='Title...' id='post-title' onChange={(event) => {

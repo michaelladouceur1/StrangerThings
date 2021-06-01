@@ -5,9 +5,11 @@ import Posts from './Posts';
 import NewPost from './NewPost';
 
 const Content = (props) => {
+    let {posts} = props
     return (
         <main>
-            <Posts />
+            <Posts
+            posts={posts} />
             <NewPost />
         </main>
     )

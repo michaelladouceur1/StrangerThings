@@ -1,0 +1,14 @@
+.posts {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.post-card {
+    margin: 20px;
+    padding: 20px;
+    background-color: gray;
+}
+
+.author {
+    background-color: aqua;
+}

@@ -21,7 +21,7 @@ async function loginRegisterUser(method, user) {
         let response = await axios.post(url, user)
         token = response.data.data.token;
         console.log('Login Token: ', token);
-        getPosts();
+        return true
     } catch (error) {
         console.log('ERROR');
         console.error(error);
@@ -42,9 +42,11 @@ async function getMeData() {
 async function getPosts() {
     let url = `${BASE_URL}/posts`;
     try {
-        let response = await axios.get(url)
-        let posts = response.data.data.posts;
-        console.log(posts);
+        let response = await axios.get(url, returnHeaders())
+        let posts = await response.data.data.posts;
+        console.log('API Posts: ', posts);
+        console.log('API isArray: ', Array.isArray(posts));
+        return posts
     } catch (error) {
         console.error(error);
     }
@@ -65,4 +67,4 @@ async function postPost(post) {
     }
 }
 
-export {loginRegisterUser, getMeData, postPost}
+export {loginRegisterUser, getMeData, getPosts, postPost}
