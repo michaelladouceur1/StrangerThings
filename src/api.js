@@ -3,6 +3,10 @@ import axios from 'axios'
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2104-uic-web-ft';
 let token = '';
 
+function setToken(passedToken) {
+    token = passedToken;
+}
+
 function returnHeaders() {
     return {
         headers: {
@@ -89,4 +93,4 @@ async function postMessage(post_id, content) {
     }
 }
 
-export {loginRegisterUser, getMeData, getPosts, postPost, deletePost, postMessage}
+export {loginRegisterUser, getMeData, getPosts, postPost, deletePost, postMessage, setToken}

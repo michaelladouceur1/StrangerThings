@@ -1,12 +1,13 @@
-function setLocalToken(token) {
-    console.log('Setting local token: ', token);
-    localStorage.setItem('token', token);
+function setLocalStorage(key, value) {
+    localStorage.setItem(key, value);
 }
 
-function getLocalToken() {
-    if(localStorage.getItem('token')) {
-        console.log('Local token found: ', localStorage.getItem('token'));
-        return localStorage.getItem('token');
+function getLocalToken(key) {
+    if(localStorage.getItem(key)) {
+        console.log('Local storage found for: ', key)
+        return localStorage.getItem(key);
     }
     return '';
 }
+
+export {setLocalStorage, getLocalToken}

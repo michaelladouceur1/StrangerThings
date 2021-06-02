@@ -13,7 +13,8 @@ import Posts from './components/Posts';
 import NewPost from './components/NewPost';
 import FeaturedPost from './components/FeaturedPost';
 import Account from './components/Account';
-import {getPosts, getMeData} from './api';
+import {getPosts, getMeData, setToken} from './api';
+import {getLocalToken} from './utils';
 
 
 // CSS IMPORTS 
@@ -22,7 +23,7 @@ import './App.css';
 function App() {
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
-  let [token, setToken] = useState('');
+  // let [token, setToken] = useState('');
   let [currentUser, setCurrentUser] = useState('');
   let [posts, setPosts] = useState([]);
   let [filteredPosts, setFilteredPosts] = useState([])
@@ -32,7 +33,20 @@ function App() {
     let posts = await getPosts();
     setPosts(posts);
     setFilteredPosts(posts);
+    if(checkLocalToken()) {
+      setCurrentUser(getLocalToken('user'))
+      let data = await getMeData();
+      setAccountData(data);
+    }
   }, [])
+
+  function checkLocalToken() {
+    let token = getLocalToken('token')
+    if(token !== '') {
+      setToken(token)
+      return true
+    }
+  }
 
   return (
     <div className='container'>

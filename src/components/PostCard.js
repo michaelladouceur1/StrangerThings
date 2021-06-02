@@ -36,9 +36,13 @@ const PostCard = (props) => {
                         ? <button className='post-card-button' onClick={deletePost}><FontAwesomeIcon icon={faTrash} /></button>
                         : ''
                     }
-                    <button className='post-card-button' onClick={() => {
-                        setMessageVisible(!messageVisible);
-                    }}><FontAwesomeIcon icon={faCommentDots} /></button>
+                    {
+                        currentUser.length > 0
+                        ? <button className='post-card-button' onClick={() => {
+                            setMessageVisible(!messageVisible);
+                        }}><FontAwesomeIcon icon={faCommentDots} /></button>
+                        : ''
+                    }
                     <Link to={`/fp/${post._id}`} className='post-card-button'><FontAwesomeIcon icon={faExpand} /></Link>
                 </div>
             </div>

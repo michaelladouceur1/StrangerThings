@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import {loginRegisterUser, getMeData, getPosts} from '../api';
-// import {setLocalToken} from '../utils'
+import {setLocalStorage} from '../utils'
 
 const Header = (props) => {
     const {username, password, currentUser, posts, setUsername, setPassword, setCurrentUser, setPosts, setAccountData} = props
@@ -19,12 +19,13 @@ const Header = (props) => {
         }
         let returnToken = await loginRegisterUser(submitButton, user);
         if(returnToken) {
-            setCurrentUser(username);
-            // setLocalToken(returnToken);
+            await setCurrentUser(username);
             let posts = await getPosts();
             let data = await getMeData();
             setPosts(posts);
             setAccountData(data);
+            setLocalStorage('token',returnToken);
+            setLocalStorage('user', username);
         }
     }
 
@@ -41,6 +42,8 @@ const Header = (props) => {
                         setUsername('');
                         setPassword('');
                         setCurrentUser('');
+                        setLocalStorage('token','');
+                        setLocalStorage('user', '');
                     }}>LOGOUT</button>
                 </div>)
                 : (<form className='signup-login' onSubmit={(event) => {

@@ -1,8 +1,9 @@
 # Future Features
-- Add localStorage for login token
+- ~~Add localStorage for login token~~
 - Search and filter functionality
 - User data page (posts and messages)
 - Finish FeaturedPosts page and functionality
+- Add logo with Link to home page
 
 # Refactor 
 - Change functionality from using author.username to isAuthor from API (Posts.js ~ 36)

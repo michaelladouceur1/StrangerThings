@@ -1,6 +1,7 @@
 .post-card {
     display: grid;
-    grid-template-rows: 100px 150px 1fr;
+    grid-template-rows: 100px 150px 100px;
+    height: 350px;
     margin: 20px;
     background-color: gray;
     transition: 0.3s;
@@ -36,6 +37,9 @@
 }
 
 .post-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 10px;
 }
 
@@ -44,6 +48,9 @@
 }
 
 .post-card-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background-color: lightblue;
     padding: 10px;
 }
