@@ -12,7 +12,8 @@ import Header from './components/Header';
 import Posts from './components/Posts';
 import NewPost from './components/NewPost';
 import FeaturedPost from './components/FeaturedPost';
-import {getPosts} from './api';
+import Account from './components/Account';
+import {getPosts, getMeData} from './api';
 
 
 // CSS IMPORTS 
@@ -25,6 +26,7 @@ function App() {
   let [currentUser, setCurrentUser] = useState('');
   let [posts, setPosts] = useState([]);
   let [filteredPosts, setFilteredPosts] = useState([])
+  let [accountData, setAccountData] = useState({});
 
   useEffect(async () => {
     let posts = await getPosts();
@@ -38,6 +40,7 @@ function App() {
       setUsername={setUsername}
       setPassword={setPassword}
       setCurrentUser={setCurrentUser}
+      setAccountData={setAccountData}
       username={username}
       password={password}
       currentUser={currentUser}
@@ -55,10 +58,20 @@ function App() {
             setPosts={setPosts}
             setFilteredPosts={setFilteredPosts} />
           </Route>
-          <Route exact path='/:id' render={(routeProps) => <FeaturedPost posts={posts} {...routeProps}/>} />
+          <Route exact path='/fp/:id' render={(routeProps) => <FeaturedPost posts={posts} {...routeProps}/>} />
+          <Route exact path='/me'>
+            <Account
+            accountData={accountData}
+            posts={posts}
+            filteredPosts={filteredPosts}
+            currentUser={currentUser}
+            setPosts={setPosts}
+            setFilteredPosts={setFilteredPosts} />
+          </Route>
         </Switch>
         <NewPost
-        setPosts={setPosts} />
+        setPosts={setPosts}
+        setFilteredPosts={setFilteredPosts} />
       </main>
     </div>
   );

@@ -30,7 +30,8 @@ async function getMeData() {
     try {
         let response = await axios.get(url, returnHeaders())
         let data = response.data.data;
-        console.log(data);
+        console.log('Me Data: ', data);
+        return data
     } catch (error) {
         console.error(error);
     }
@@ -78,11 +79,11 @@ async function postMessage(post_id, content) {
             'content': content
         }
     }
-    console.log(post_id)
-    console.log(newMessage)
+    console.log('Post ID: ', post_id)
+    console.log('New Message: ', newMessage)
     try {
         let response = await axios.post(url, newMessage, returnHeaders());
-        console.log(response);
+        console.log('API Response: ', response);
     } catch (error) {
         console.error(error);
     }

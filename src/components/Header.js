@@ -1,12 +1,13 @@
 import './Header.css'
 import React from 'react';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import {loginRegisterUser, getMeData, getPosts} from '../api';
 // import {setLocalToken} from '../utils'
 
 const Header = (props) => {
-    const {username, password, currentUser, posts, setUsername, setPassword, setCurrentUser, setPosts} = props
+    const {username, password, currentUser, posts, setUsername, setPassword, setCurrentUser, setPosts, setAccountData} = props
     const [submitButton, setSubmitButton] = useState('');
 
     async function submitForm() {
@@ -21,7 +22,9 @@ const Header = (props) => {
             setCurrentUser(username);
             // setLocalToken(returnToken);
             let posts = await getPosts();
+            let data = await getMeData();
             setPosts(posts);
+            setAccountData(data);
         }
     }
 
@@ -31,14 +34,14 @@ const Header = (props) => {
             {
                 currentUser !== ''
                 ? (<div className='logged-in-menu'>
-                    <h1>{currentUser}</h1>
                     {/* Make dropdown with all posts and messages */}
-                    <button onClick={getMeData}>Account</button>
+                    <Link className='btn' to='/me'>{currentUser.toUpperCase()}</Link>
+                    {/* <button onClick={getMeData}>{currentUser.toUpperCase()}</button> */}
                     <button onClick={() => {
                         setUsername('');
                         setPassword('');
                         setCurrentUser('');
-                    }}>Logout</button>
+                    }}>LOGOUT</button>
                 </div>)
                 : (<form className='signup-login' onSubmit={(event) => {
                     event.preventDefault();

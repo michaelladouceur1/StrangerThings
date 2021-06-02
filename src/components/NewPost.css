@@ -1,11 +1,13 @@
 @import url('../App.css');
 
 .new-post {
-    display: flex;
-    /* flex-direction: column; */
-    padding: 30px;
+    padding: 20px;
     height: 100%;
     width: 30%;
+}
+
+.post-form {
+    width: 100%;
 }
 
 .opened {

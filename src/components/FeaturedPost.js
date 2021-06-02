@@ -5,7 +5,7 @@ const FeaturedPost = (props) => {
     let {id} = props.match.params
     let {posts} = props
     let post = posts.filter((post) => post._id === id)[0]
-    console.log(post)
+    console.log('Featured Post: ',post)
 
     return (
         <div className='featured'>

@@ -1,0 +1,9 @@
+.message-card {
+    margin: 20px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.message-card:nth-child(odd) {
+    color: gray;
+}
