@@ -7,6 +7,7 @@ import {postPost, getPosts} from '../api'
 const NewPost = (props) => {
     let {setPosts} = props
 
+    let [newPostVisible, setNewPostVisible] = useState(true);
     let [title, setTitle] = useState('');
     let [description, setDescription] = useState('');
     let [price, setPrice] = useState('');
@@ -53,6 +54,12 @@ const NewPost = (props) => {
 
     return (
         <div className='new-post'>
+            {/* <div className='slide-out' onClick={() => {
+                setNewPostVisible(!newPostVisible)
+                console.log(newPostVisible);
+            }}>
+                <div className='slide-out-triangle'></div>
+            </div> */}
             <form id='post-form' onSubmit={submitPost}>
                 <div className='input-group'>
                     <label htmlFor='post-title'>Title</label>

@@ -3,6 +3,7 @@ import React from 'react';
 import {useState} from 'react';
 
 import {loginRegisterUser, getMeData, getPosts} from '../api';
+// import {setLocalToken} from '../utils'
 
 const Header = (props) => {
     const {username, password, currentUser, posts, setUsername, setPassword, setCurrentUser, setPosts} = props
@@ -15,9 +16,10 @@ const Header = (props) => {
                 'password': password
             }
         }
-        let success = loginRegisterUser(submitButton, user);
-        if(success) {
+        let returnToken = await loginRegisterUser(submitButton, user);
+        if(returnToken) {
             setCurrentUser(username);
+            // setLocalToken(returnToken);
             let posts = await getPosts();
             setPosts(posts);
         }

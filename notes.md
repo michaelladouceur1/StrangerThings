@@ -5,7 +5,10 @@
 
 # Refactor 
 - Change functionality from using author.username to isAuthor from API (Posts.js ~ 36)
+- Move event listener functions to separate functions in components
+- Move PostCard to separate file
 
 # Bugs
-- Function not clearing form when invoked (NewPosts.js ~ 37)
 - Messages not showing in object even after successful API call (Posts.js ~ 68 ; FeaturedPost.js ~ 23)
+- Location for a new post is not reverting to '[On Request]' when left blank (NewPost.js ~ 13)
+- New post form not clearing when submitted and function invoked (NewPost.js ~ 38)

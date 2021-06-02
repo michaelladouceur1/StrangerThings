@@ -21,12 +21,15 @@ import './App.css';
 function App() {
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
+  let [token, setToken] = useState('');
   let [currentUser, setCurrentUser] = useState('');
   let [posts, setPosts] = useState([]);
+  let [filteredPosts, setFilteredPosts] = useState([])
 
   useEffect(async () => {
     let posts = await getPosts();
     setPosts(posts);
+    setFilteredPosts(posts);
   }, [])
 
   return (
@@ -47,8 +50,10 @@ function App() {
           <Route exact path='/'>
             <Posts
             posts={posts}
+            filteredPosts={filteredPosts}
             currentUser={currentUser}
-            setPosts={setPosts} />
+            setPosts={setPosts}
+            setFilteredPosts={setFilteredPosts} />
           </Route>
           <Route exact path='/:id' render={(routeProps) => <FeaturedPost posts={posts} {...routeProps}/>} />
         </Switch>

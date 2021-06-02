@@ -1,13 +1,9 @@
 import axios from 'axios'
 
-// import {setLocalToken, getLocalToken} from './utils'
-
 const BASE_URL = 'https://strangers-things.herokuapp.com/api/2104-uic-web-ft';
 let token = '';
 
 function returnHeaders() {
-    console.log('Headers called...');
-    console.log('Token: ', token);
     return {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -20,8 +16,7 @@ async function loginRegisterUser(method, user) {
     try {
         let response = await axios.post(url, user)
         token = response.data.data.token;
-        console.log('Login Token: ', token);
-        return true
+        return token
     } catch (error) {
         console.log('ERROR');
         console.error(error);
