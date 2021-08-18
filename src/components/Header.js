@@ -17,7 +17,9 @@ const Header = (props) => {
                 'password': password
             }
         }
+        
         let returnToken = await loginRegisterUser(submitButton, user);
+
         if(returnToken) {
             await setCurrentUser(username);
             let posts = await getPosts();
